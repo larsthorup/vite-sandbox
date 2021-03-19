@@ -1,0 +1,6 @@
+{
+  "name": "vite-sandbox",
+  "workspaces": [
+    "app"
+  ]
+}
