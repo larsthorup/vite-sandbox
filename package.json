@@ -6,6 +6,12 @@
   "scripts": {
     "build": "cd app && npm run build",
     "dev": "cd app && npm run dev",
-    "test": "cd app && node ../test-runner"
+    "test": "cd app && node ../test-runner | faucet"
+  },
+  "dependencies": {
+    "faucet": "^0.0.1",
+    "tap-dot": "^2.0.0",
+    "tap-mocha-reporter": "^5.0.1",
+    "tap-spec": "^5.0.0"
   }
 }
