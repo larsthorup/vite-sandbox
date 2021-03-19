@@ -8,6 +8,13 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // Note: globals expected by React and React Testing Library
+      global = window;
+      process = {
+        env: {}
+      };
+    </script>
     <script type="module" src="/src/test.js"></script>
   </body>
 </html>

@@ -16,10 +16,16 @@ const main = async () => {
   const page = await browser.newPage();
   const address = `http://localhost:${PORT}/test.html`;
 
-  page.on('console', (msg) => console.log(msg._text));
-  console.log({ address });
+  page.on('console', (msg) => {
+    console.log(msg._text);
+  });
+  page.on('pageerror', ({ message }) => {
+    console.error(message);
+  });
   await page.goto(address, { waitUntil: 'domcontentloaded' });
   await browser.close();
+  // TODO: wait until tests have completed
+  // await new Promise((resolve) => setTimeout(resolve, 3000));
   await server.close();
 };
 

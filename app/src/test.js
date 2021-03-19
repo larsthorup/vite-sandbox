@@ -1,1 +1,1 @@
-const modules = import.meta.globEager('/src/**/*.test.js');
+const modules = import.meta.globEager('/src/**/*.test.{js,jsx}');
