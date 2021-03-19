@@ -1,0 +1,10 @@
+{
+  "name": "test-runner",
+  "type": "module",
+  "main": "index.js",
+  "author": "Lars Thorup <lars@zealake.com> (https://www.zealake.com/)",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^8.0.0"
+  }
+}

@@ -2,8 +2,9 @@
 
 ```bash
 npm install
-(cd app && npm run dev)
-(cd app && npm run build)
+npm test
+npm run dev
+npm run build
 ```
 
 Note: this project was scaffolded with:
