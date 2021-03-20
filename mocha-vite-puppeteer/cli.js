@@ -1,3 +1,4 @@
+import * as module from 'module';
 import * as path from 'path';
 
 import puppeteer from 'puppeteer'
@@ -8,13 +9,12 @@ const port = 3001;
 const root = '.'; // Note: relative to cwd
 const entry = 'test.html'; // Note: relative to root
 const reporter = 'spec';
-// Note: https://mochajs.org/#running-mocha-in-the-browser
-const mochaPath = '../node_modules/mocha/mocha.js'; // Note: relative to cwd
 const verbose = false;
 const debug = false;
 // ----
 
-const mochaAbsolutePath = path.resolve(process.cwd(), mochaPath);
+// Note: https://mochajs.org/#running-mocha-in-the-browser
+const mochaAbsolutePath = module.createRequire(import.meta.url).resolve('mocha/mocha.js');
 const server = await createServer({
   resolve: {
     alias: {
