@@ -1,20 +1,16 @@
 import React, { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
-import { add } from '@vite-sandbox/lib/calc';
+import Counter from '@vite-sandbox/ui/Counter';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>Hello Vite + React!</p>
         <p>
-          <button onClick={() => setCount((count) => add(count, 1))}>
-            count is: {count}
-          </button>
+          <Counter />
         </p>
         <p>
           Edit <code>App.jsx</code> and save to test HMR updates.

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="src/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite Sandbox UI Test</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      // Note: globals expected by React and React Testing Library
+      // not sure why they must be here, instead of in test.js
+      global = window;
+      process = {
+        env: {}
+      };
+    </script>
+    <script type="module" src="/src/testInit.js"></script>
+    <script type="module" src="/src/testLoader.js"></script>
+    <script type="module" src="/src/testRunner.js"></script>
+  </body>
+</html>

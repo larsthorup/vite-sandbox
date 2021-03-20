@@ -1,0 +1,1 @@
+mocha.run((failures) => console.log(`mocha:complete:${failures}`));

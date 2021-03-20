@@ -3,13 +3,16 @@
   "workspaces": [
     "app",
     "lib",
-    "test-launcher"
+    "test-launcher",
+    "ui"
   ],
   "scripts": {
     "build": "cd app && npm run build",
     "dev": "cd app && npm run dev",
-    "test": "npm run test:lib && npm run test:app",
+    "serve": "cd app && vite preview",
+    "test": "npm run test:lib && npm run test:ui && npm run test:app",
     "test:app": "cd app && npm test",
-    "test:lib": "cd lib && npm test"
+    "test:lib": "cd lib && npm test",
+    "test:ui": "cd ui && npm test"
   }
 }

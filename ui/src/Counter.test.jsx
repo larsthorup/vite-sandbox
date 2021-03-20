@@ -2,12 +2,11 @@ import { expect } from 'chai';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import App from './App';
+import Counter from './Counter';
 
-describe('App', () => {
-  it('should greet and count', () => {
-    render(<App />);
-    screen.getByText('Hello Vite + React!');
+describe('Counter', () => {
+  it('should count', () => {
+    render(<Counter />);
     const countButton = screen.getByText('count is: 0');
     countButton.click();
     screen.getByText('count is: 1');

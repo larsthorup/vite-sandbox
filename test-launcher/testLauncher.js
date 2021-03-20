@@ -8,7 +8,6 @@ const main = async () => {
   const server = await createServer({
     server: {
       port: PORT,
-
     },
   }, false);
   await server.listen();
