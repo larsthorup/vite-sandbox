@@ -1,5 +1,4 @@
 import * as path from 'path';
-import * as url from 'url';
 
 import puppeteer from 'puppeteer'
 import { createServer } from 'vite'
@@ -9,16 +8,17 @@ const port = 3001;
 const root = '.'; // Note: relative to cwd
 const entry = 'test.html'; // Note: relative to root
 const reporter = 'spec';
+// Note: https://mochajs.org/#running-mocha-in-the-browser
+const mochaPath = '../node_modules/mocha/mocha.js'; // Note: relative to cwd
 const verbose = false;
 const debug = false;
-const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
-const mochaPath = path.resolve(__dirname, '../node_modules/mocha/mocha.js'); // Note: https://mochajs.org/#running-mocha-in-the-browser
 // ----
 
+const mochaAbsolutePath = path.resolve(process.cwd(), mochaPath);
 const server = await createServer({
   resolve: {
     alias: {
-      'mocha': mochaPath
+      'mocha': mochaAbsolutePath
     }
   },
   server: {
