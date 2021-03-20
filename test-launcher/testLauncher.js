@@ -17,29 +17,40 @@ const main = async () => {
   const page = await browser.newPage();
   const address = `http://localhost:${PORT}/test.html`;
 
-  page.on('console', (msg) => {
-    console.log.apply(console, msg.args().map((arg) => {
-      // Note: this assumes that all the arguments are primitive values
-      return arg._remoteObject.value;
-    }));
-  });
-  page.on('requestfailed', (request) => {
-    console.error(request.url() + ' ' + request.failure().errorText);
-  });
-  // page.on('requestfinished', (request) => {
-  //   console.log(request.url());
-  // });
-  page.on('pageerror', ({ message }) => {
-    console.error(message);
-  });
-  page.on('error', (err) => {
-    console.error(err);
-  });
-  await page.goto(address, { waitUntil: 'domcontentloaded' });
-  // TODO: wait until tests have completed
-  await new Promise((resolve) => setTimeout(resolve, 3000));
-  await browser.close();
-  await server.close();
+  let failureCount = 0;
+  try {
+    // Note: wait for completion or errors
+    failureCount = await new Promise((resolve, reject) => {
+      page.on('console', (msg) => {
+        if (msg._text.startsWith('mocha:complete:')) {
+          const failureCount = parseInt(msg._text.split(':')[2]);
+          resolve(failureCount);
+        } else {
+          console.log.apply(console, msg.args().map((arg) => {
+            // Note: this assumes that all the arguments are primitive values
+            return arg._remoteObject.value;
+          }));
+        }
+      });
+      page.on('requestfailed', (request) => {
+        reject(new Error(request.url() + ' ' + request.failure().errorText));
+      });
+      // page.on('requestfinished', (request) => {
+      //   console.log(request.url());
+      // });
+      page.on('pageerror', ({ message }) => {
+        reject(new Error(message));
+      });
+      page.on('error', (err) => {
+        reject(err);
+      });
+      page.goto(address, { waitUntil: 'domcontentloaded' });
+    });
+  } finally {
+    await browser.close();
+    await server.close();
+  }
+  process.exit(failureCount);
 };
 
 main().catch((err) => { throw err; })
