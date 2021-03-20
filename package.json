@@ -3,11 +3,12 @@
   "workspaces": [
     "app",
     "lib",
-    "test-launcher",
+    "mocha-vite-puppeteer",
     "ui"
   ],
   "scripts": {
     "build": "cd app && npm run build",
+    "clean": "git clean -f -d -X",
     "dev": "cd app && npm run dev",
     "serve": "cd app && vite preview",
     "test": "npm run test:lib && npm run test:ui && npm run test:app",
