@@ -3,7 +3,6 @@
   "workspaces": [
     "app",
     "lib",
-    "mocha-vite-puppeteer",
     "ui"
   ],
   "scripts": {
@@ -15,5 +14,8 @@
     "test:app": "cd app && npm test",
     "test:lib": "cd lib && npm test",
     "test:ui": "cd ui && npm test"
+  },
+  "dependencies": {
+    "mocha-vite-puppeteer": "^1.0.0"
   }
 }
