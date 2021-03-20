@@ -1,5 +1,7 @@
 # vite-sandbox
 
+[![Build Status](https://api.travis-ci.com/larsthorup/vite-sandbox.svg)](https://travis-ci.com/github/larsthorup/vite-sandbox)
+
 ```bash
 npm install
 npm test
