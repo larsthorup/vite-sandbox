@@ -11,6 +11,6 @@
     "./Counter": "./src/Counter.jsx"
   },
   "scripts": {
-    "test": "node ../test-launcher/testLauncher"
+    "test": "node ../mocha-vite-puppeteer/cli"
   }
 }

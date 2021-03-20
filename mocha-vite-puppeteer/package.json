@@ -1,7 +1,7 @@
 {
-  "name": "test-runner",
+  "name": "mocha-vite-puppeteer",
   "type": "module",
-  "main": "testLauncher.js",
+  "main": "cli.js",
   "author": "Lars Thorup <lars@zealake.com> (https://www.zealake.com/)",
   "license": "MIT",
   "dependencies": {
