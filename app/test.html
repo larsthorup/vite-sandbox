@@ -10,11 +10,14 @@
     <div id="root"></div>
     <script>
       // Note: globals expected by React and React Testing Library
+      // not sure why they must be here, instead of in test.js
       global = window;
       process = {
         env: {}
       };
     </script>
-    <script type="module" src="/src/test.js"></script>
+    <script type="module" src="/src/testInit.js"></script>
+    <script type="module" src="/src/testLoader.js"></script>
+    <script type="module" src="/src/testRunner.js"></script>
   </body>
 </html>

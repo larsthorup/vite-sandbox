@@ -1,17 +1,24 @@
-const equal = (actual, expected, message) => {
-  if (actual !== expected) {
-    throw new Error(`Expected "${actual}" to equal "${expected}": ${message}`);
-  }
-}
+import { expect } from 'chai';
 
-(() => {
-  equal(2 + 2, 4, 'addition');
-  equal(4 - 2, 2, 'subtraction');
-  console.log('√ numerical calculations')
-})();
+describe('lib', () => {
+  describe('numerical calculations', () => {
+    it('should add', () => {
+      expect(2 + 2).to.equal(4);
+    });
 
-(() => {
-  equal('hey' + ' ' + 'lars', 'hey lars', 'concatenation');
-  equal(' hey lars '.trim(), 'hey lars', 'trim');
-  console.log('√ string manipulations')
-})();
+    it('should subtract', () => {
+      expect(4 - 2).to.equal(2);
+    });
+  });
+
+  describe('string manipulation', () => {
+    it('should concatenation', () => {
+      expect('hey' + ' ' + 'lars').to.equal('hey lars');
+    });
+
+    it('should trim', () => {
+      expect(' hey lars '.trim()).to.equal('hey lars');
+    });
+  });
+});
+

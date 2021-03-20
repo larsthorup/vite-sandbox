@@ -6,6 +6,6 @@
   "scripts": {
     "build": "cd app && npm run build",
     "dev": "cd app && npm run dev",
-    "test": "cd app && node ../test-runner"
+    "test": "cd app && npm test"
   }
 }
