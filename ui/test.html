@@ -16,7 +16,12 @@
         env: {}
       };
     </script>
-    <script type="module" src="/src/testInit.js"></script>
-    <script type="module" src="/src/testLoader.js"></script>
+    <script type="module">
+      import 'mocha';
+      mocha.setup({ ui: 'bdd' });
+    </script>
+    <script type="module">
+      const modules = import.meta.globEager('/src/**/*.test.{js,jsx}');
+    </script>
   </body>
 </html>

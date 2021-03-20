@@ -47,7 +47,10 @@ const main = async () => {
     });
     await page.goto(address, { waitUntil: 'domcontentloaded' });
     const failureCount = await page.evaluate(() => {
-      return new Promise((resolve) => mocha.run(resolve));
+      return new Promise((resolve) => {
+        mocha.reporter('spec');
+        mocha.run(resolve);
+      });
     });
     process.exit(failureCount);
   } finally {
