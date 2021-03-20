@@ -4,59 +4,65 @@ import * as url from 'url';
 import puppeteer from 'puppeteer'
 import { createServer } from 'vite'
 
-const PORT = 3001;
-const root = '.';
+// Note: eventually turn into args with default values
+const port = 3001;
+const root = '.'; // Note: relative to cwd
+const entry = 'test.html'; // Note: relative to root
+const reporter = 'spec';
+const verbose = false;
+const debug = false;
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+const mochaPath = path.resolve(__dirname, '../node_modules/mocha/mocha.js'); // Note: https://mochajs.org/#running-mocha-in-the-browser
+// ----
 
-const main = async () => {
-  const server = await createServer({
-    resolve: {
-      alias: {
-        // Note: https://mochajs.org/#running-mocha-in-the-browser
-        'mocha': path.resolve(__dirname, '../node_modules/mocha/mocha.js')
-      }
-    },
-    server: {
-      port: PORT,
-    },
-  }, false);
-  await server.listen();
+const server = await createServer({
+  resolve: {
+    alias: {
+      'mocha': mochaPath
+    }
+  },
+  server: {
+    port: port,
+  },
+}, false);
+await server.listen();
 
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  const address = `http://localhost:${PORT}/test.html`;
+const browser = await puppeteer.launch();
+const page = await browser.newPage();
+const address = `http://localhost:${port}/${entry}`;
 
-  try {
-    page.on('console', (msg) => {
-      console.log.apply(console, msg.args().map((arg) => {
-        // Note: this assumes that all the arguments are primitive values
-        return arg._remoteObject.value;
-      }));
+try {
+  page.on('console', (msg) => {
+    console.log.apply(console, msg.args().map((arg) => {
+      // Note: this assumes that all the arguments are primitive values
+      return arg._remoteObject.value;
+    }));
+  });
+  page.on('requestfailed', (request) => {
+    throw new Error(request.url() + ' ' + request.failure().errorText);
+  });
+  if (verbose) {
+    page.on('requestfinished', (request) => {
+      console.log(request.url());
     });
-    page.on('requestfailed', (request) => {
-      throw new Error(request.url() + ' ' + request.failure().errorText);
+  }
+  page.on('pageerror', ({ message }) => {
+    throw new Error(message);
+  });
+  page.on('error', (err) => {
+    throw err;
+  });
+  await page.goto(address, { waitUntil: 'domcontentloaded' });
+  const failureCount = await page.evaluate((reporter) => {
+    return new Promise((resolve) => {
+      mocha.reporter(reporter);
+      mocha.run(resolve);
     });
-    // page.on('requestfinished', (request) => {
-    //   console.log(request.url());
-    // });
-    page.on('pageerror', ({ message }) => {
-      throw new Error(message);
-    });
-    page.on('error', (err) => {
-      throw err;
-    });
-    await page.goto(address, { waitUntil: 'domcontentloaded' });
-    const failureCount = await page.evaluate(() => {
-      return new Promise((resolve) => {
-        mocha.reporter('spec');
-        mocha.run(resolve);
-      });
-    });
-    process.exit(failureCount);
-  } finally {
-    await browser.close();
+  }, reporter);
+  process.exit(failureCount);
+} finally {
+  await browser.close();
+  if (!debug) {
     await server.close();
   }
-};
-
-main().catch((err) => { throw err; })
+}
