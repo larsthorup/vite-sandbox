@@ -1,11 +1,21 @@
+import * as path from 'path';
+import * as url from 'url';
+
 import puppeteer from 'puppeteer'
 import { createServer } from 'vite'
 
 const PORT = 3001;
 const root = '.';
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 const main = async () => {
   const server = await createServer({
+    resolve: {
+      alias: {
+        // Note: https://mochajs.org/#running-mocha-in-the-browser
+        'mocha': path.resolve(__dirname, '../node_modules/mocha/mocha.js')
+      }
+    },
     server: {
       port: PORT,
     },
