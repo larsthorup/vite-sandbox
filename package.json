@@ -2,11 +2,14 @@
   "name": "vite-sandbox",
   "workspaces": [
     "app",
+    "lib",
     "test-launcher"
   ],
   "scripts": {
     "build": "cd app && npm run build",
     "dev": "cd app && npm run dev",
-    "test": "cd app && npm test"
+    "test": "npm run test:lib && npm run test:app",
+    "test:app": "cd app && npm test",
+    "test:lib": "cd lib && npm test"
   }
 }

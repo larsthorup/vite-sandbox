@@ -1,0 +1,14 @@
+{
+  "name": "@vite-sandbox/lib",
+  "type": "module",
+  "dependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^8.3.2"
+  },
+  "exports": {
+    "./calc": "./src/calc.js"
+  },
+  "scripts": {
+    "test": "mocha --reporter spec src/**/*.test.js"
+  }
+}
