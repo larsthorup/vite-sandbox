@@ -5,7 +5,7 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "test": "mocha-vite-puppeteer"
+    "test": "mocha-vite-puppeteer --reporter spec"
   },
   "dependencies": {
     "@testing-library/react": "^11.2.5",
