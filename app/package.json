@@ -5,7 +5,7 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "test": "mocha-vite-puppeteer --reporter mocha-junit-reporter"
+    "test": "mocha-vite-puppeteer --reporter mocha-junit-reporter --reporter-options mocha-junit-reporter.config.json"
   },
   "dependencies": {
     "@testing-library/react": "^11.2.5",
