@@ -16,6 +16,6 @@
     "test:ui": "cd ui && npm test"
   },
   "dependencies": {
-    "mocha-vite-puppeteer": "^1.12.0"
+    "mocha-vite-puppeteer": "^2.0.0-beta.1"
   }
 }
