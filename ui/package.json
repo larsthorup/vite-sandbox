@@ -1,11 +1,11 @@
 {
   "name": "@vite-sandbox/ui",
   "dependencies": {
-    "@testing-library/react": "^11.2.5",
+    "@testing-library/react": "^14.0.0",
     "chai": "^4.3.4",
-    "mocha": "^8.3.2",
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "mocha": "^10.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "exports": {
     "./Counter": "./src/Counter.jsx"
