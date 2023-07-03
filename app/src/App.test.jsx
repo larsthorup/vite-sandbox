@@ -10,6 +10,6 @@ describe('App', () => {
     screen.getByText('Hello Vite + React!');
     const countButton = screen.getByText('count is: 0');
     countButton.click();
-    await screen.getByText('count is: 1');
+    await screen.findByText('count is: 1');
   });
 });
